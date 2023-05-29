@@ -1,0 +1,38 @@
+---
+title: "Karl Task 3"
+author: "Taryn H"
+date: "2023-05-02"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+pacman::p_load(tidyverse,pwr)
+```
+
+
+```{r}
+power<-0.9
+alpha<-0.05
+R2<-0.1
+
+#Effect size, strength of relationship between variables
+effect_size<-R2/(1-R2)
+
+#Degrees of freedom = Number of predictor variables.
+#Note when looking at predictors with multiple levels, the reference level 
+#is not counted. 
+num_pred<-5
+
+pwr.f2.test(u=num_pred, f2=effect_size, sig.level=alpha, power=power)
+
+#Note: the output, v, is the denominator degrees of freedom rather than sample 
+#size, so we need to add on the total number of variables (num_pred+1)
+
+sample_size<-round(147.8645)+num_pred+1
+
+sample_size
+```
+

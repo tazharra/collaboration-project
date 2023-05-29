@@ -1,0 +1,168 @@
+---
+title: "Karl Task 4"
+author: "Taryn H"
+date: "2023-05-18"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+pacman::p_load(tidyverse, tidymodels, lme4, sjPlot)
+#install.packages("lme4")
+#install.packages("sjPlot")
+library("lme4")
+library("sjPlot")
+
+```
+
+
+#Load in data
+```{r}
+data<-read_csv(here::here("raw-data", "Gene_Expression.csv"))
+#data <- data |> select(Cell_Line, Concentration, Treatment,Gene_Expression)
+
+data <- data |> filter(Gene_Expression>0)
+data
+```
+
+#Random Intercept Model - Treatment as Random Effect
+```{r}
+model1<-lmer(Gene_Expression ~ Concentration + 
+                       Cell_Line +
+                       (1 | Treatment), data=data)
+summary(model1)
+
+coef(summary(model1))
+```
+
+#Random Intercept Model - Random Slope for Treatment
+```{r}
+model2<-lmer(Gene_Expression ~  Cell_Line + (0 + Concentration | Treatment), data=data)
+
+
+summary(model2)
+
+coef(summary(model2))
+
+```
+
+#Random Slope and Intercepts for Treatment
+```{r}
+model5<-lmer(Gene_Expression ~ Concentration + 
+                       (1 + Concentration | Treatment), data=data)
+
+
+summary(model5)
+
+coef(summary(model5))
+```
+
+
+#Random Intercept Model - Cell Line as Random Effect
+```{r}
+model3<-lmer(Gene_Expression~Concentration + 
+                        Treatment +
+                        (1 | Cell_Line), data=data)
+
+summary(model3)
+
+coef(summary(model3))
+```
+
+#Random Intercept Model - Random Slope for Cell Line
+```{r}
+model4<-lmer(Gene_Expression ~  Treatment + (0 + Concentration | Cell_Line), data=data)
+
+summary(model4)
+
+coef(summary(model4))
+```
+
+
+
+#AIC Comparison
+```{r}
+AIC(model1, model2, model3, model4)
+```
+
+#Producing visualisation for model 3
+```{r}
+ranef(model3)
+
+fixef(model3)
+
+#sjp.lmer(model3, vars="Concentration", type="ri.slope")
+
+data |> mutate(my_model = predict(model3)) |>
+  ggplot(aes(x=Concentration, y=Gene_Expression, col=`Cell Line_Treatment`)) + geom_point() +
+  geom_line(aes(x=Concentration, y=my_model))
+
+
+```
+
+#Producing visualisation for model 2
+```{r}
+
+data |> mutate(my_model = predict(model2)) |>
+  ggplot(aes(x=Concentration, y=Gene_Expression, col=`Cell Line_Treatment`)) + geom_point() +
+  geom_line(aes(x=Concentration, y=my_model))
+
+```
+
+
+
+#Stuff I may not need
+```{r}
+data1 <- data |> filter(Cell_Line == "Wild Type" & Treatment == "Placebo")
+plot1<- data1 |> mutate(my_model_new=predict(model3, newdata=data1)) |> 
+  ggplot(aes(x=Concentration, y=Gene_Expression, col=Cell_Line)) + geom_point() +
+  geom_line(aes(x=Concentration, y=my_model_new)) + 
+  scale_fill_discrete(labels=c("Wild Type and Placebo"))
+  
+
+data2 <- data |> filter(Cell_Line == "Wild Type" & Treatment == "Activating Factor 42")
+plot2<-data2 |> mutate(my_model_new=predict(model3, newdata=data2)) |> 
+  ggplot(aes(x=Concentration, y=Gene_Expression, col=Treatment)) + geom_point() +
+  geom_line(aes(x=Concentration, y=my_model_new))
+
+data3 <- data |> filter(Cell_Line == "Cell Type 101" & Treatment == "Placebo")
+plot3<-data3 |> mutate(my_model_new=predict(model3, newdata=data3)) |> 
+  ggplot(aes(x=Concentration, y=Gene_Expression, col=Cell_Line)) + geom_point() +
+  geom_line(aes(x=Concentration, y=my_model_new))
+
+data4 <- data |> filter(Cell_Line == "Cell Type 101" & Treatment == "Activating Factor 42")
+plot4<-data4 |> mutate(my_model_new=predict(model3, newdata=data4)) |> 
+  ggplot(aes(x=Concentration, y=Gene_Expression, col=Cell_Line)) + geom_point() +
+  geom_line(aes(x=Concentration, y=my_model_new))
+
+plot1 + plot2 + plot3 + plot4
+
+data1 <- data |> filter(Cell_Line == "Wild Type" & Treatment == "Placebo")
+plot1<- data1 |> mutate(my_model_new=predict(model3, newdata=data1)) |> 
+  ggplot(aes(x=Concentration, y=Gene_Expression, col=Cell_Line)) + geom_point() +
+  geom_line(aes(x=Concentration, y=my_model_new)) + 
+  scale_fill_discrete(labels=c("Wild Type and Placebo"))
+  
+
+data2 <- data |> filter(Cell_Line == "Wild Type" & Treatment == "Activating Factor 42")
+plot2<-data2 |> mutate(my_model_new=predict(model3, newdata=data2)) |> 
+  ggplot(aes(x=Concentration, y=Gene_Expression, col=Treatment)) + geom_point() +
+  geom_line(aes(x=Concentration, y=my_model_new))
+
+data3 <- data |> filter(Cell_Line == "Cell Type 101" & Treatment == "Placebo")
+plot3<-data3 |> mutate(my_model_new=predict(model3, newdata=data3)) |> 
+  ggplot(aes(x=Concentration, y=Gene_Expression, col=Cell_Line)) + geom_point() +
+  geom_line(aes(x=Concentration, y=my_model_new))
+
+data4 <- data |> filter(Cell_Line == "Cell Type 101" & Treatment == "Activating Factor 42")
+plot4<-data4 |> mutate(my_model_new=predict(model3, newdata=data4)) |> 
+  ggplot(aes(x=Concentration, y=Gene_Expression, col=Cell_Line)) + geom_point() +
+  geom_line(aes(x=Concentration, y=my_model_new))
+
+plot1 + plot2 + plot3 + plot4
+
+```
+

@@ -1,0 +1,49 @@
+---
+title: "READ ME - Project Set Up"
+format: html
+editor: visual
+---
+
+The collaboration project contains all R files, documents, analysis and calculations undertaken throughout the project.
+
+The files have the following structure:
+
+### Raw-Data
+
+Contains the data compiled into one excel document. The collaborator provided the original file as a google sheet which we were not allowed to download. The data was in multiple tabs so it was combined into one data list.
+
+### R
+
+The R File contains the files used to undertaken the projects given to us by Karl. There are:
+
+-   Gene Expression - Karl 1 Analysis.Rmd
+
+-   Karl Task 2. Rmd
+
+-   Karl Task 3.Rmd
+
+-   Karl Task 4 Attempt 2.Rmd
+
+-   IMRaD Report 2.Rmd
+
+The processes undertaken to produce each one of these files can be found in the README - what I did.qmd
+
+### Created Files
+
+This file contains all the outputted files required for submission. The files were:
+
+-   Karl Plot.tiff (From Task 2)
+
+-   IMRaD Report Final.pdf (From Task 4)
+
+-   Presentation Gene Expression Data.pptx (From Task 1)
+
+    -   Gene-Expression---Karl-1-Analysis.pdf
+
+    -   Gene-Expression---Karl-1-Analysis.docx
+
+-   Karl Task 3.pdf (From Task 3)
+
+### Read Me Quarto Files
+
+This file contains the .qmd versions of the README files. The HTML's of the README's are in the main file.

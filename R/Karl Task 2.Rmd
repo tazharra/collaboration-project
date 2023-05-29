@@ -1,0 +1,252 @@
+---
+title: "Karl Task 2"
+author: "Taryn H"
+date: "2023-04-03"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+pacman::p_load(tidyverse, tidymodels,glmnet, plotly, 
+               vip, paletteer,car, ggplot2,gt,dplyr,viridis,showtext,patchwork, ggrepel)
+
+#install.packages("patchwork")
+#library("patchwork")
+```
+
+# Load Data + filter out outlier
+```{r}
+data<-read_csv(here::here("raw-data", "Gene_Expression.csv"))
+data
+
+data <- data |> filter(Gene_Expression>0)
+```
+
+
+#Make the plot
+```{r}
+library(showtext)
+
+font_add(
+  family="times",
+  regular=here::here("figs","Times New Roman.ttf")
+)
+
+showtext_auto()
+
+#par(mfrow=c(1,2)) #Set the plotting area into a 1*2 array
+
+data1 <- data |> filter(Cell_Line == "Wild Type")
+plot1<-data1 |> ggplot(aes(x=Concentration, y=Gene_Expression,col=Treatment)) + 
+  geom_point(aes(fill=Treatment),color="black", size=3, shape=21) +
+  ggtitle("Wild-type") +
+  xlab("µg/ml") +
+  ylab("Gene Expression") +
+  theme(legend.position="bottom", legend.key=element_rect(fill="white")) +
+  scale_fill_manual(values=c("#77a8d2", "#d5bf98")) +
+  scale_x_continuous(breaks = c(0,1,2,3,4,5,6,7,8,9,10), limits = c(0, 11)) +
+  geom_label(label="JZC", 
+             x=10.5, 
+             y=42,
+             label.padding = unit(0.35, "lines"), # Rectangle size around label
+             label.size = 0.35,
+             color = "black",
+            fill="#77a8d2") +
+  geom_label(label="fUg", 
+             x=10.5, 
+             y=36,
+             label.padding = unit(0.35, "lines"), # Rectangle size around label
+             label.size = 0.35,
+             color = "black",
+            fill="#77a8d2") +
+  geom_label(label="CsE", 
+             x=10.5, 
+             y=14,
+             label.padding = unit(0.35, "lines"), # Rectangle size around label
+             label.size = 0.35,
+             color = "black",
+            fill="#d5bf98") +
+    geom_label(label="bNo", 
+             x=10.5, 
+             y=8,
+             label.padding = unit(0.35, "lines"), # Rectangle size around label
+             label.size = 0.35,
+             color = "black",
+            fill="#d5bf98") +
+    theme(
+    text=element_text(family="times")
+  ) 
+
+data2 <- data |> filter(Cell_Line == "Cell Type 101")
+plot2<-data2 |> ggplot(aes(x=Concentration, y=Gene_Expression, col=Treatment)) + 
+  geom_point(aes(fill=Treatment), color="black", size=3, shape=21) +
+  ggtitle("Cell-type 101") +
+  xlab("µg/ml") +
+  ylab("Gene Expression") +
+  theme(legend.position="bottom", legend.key=element_rect(fill="white")) +
+  scale_fill_manual(values=c("#77a8d2", "#d5bf98")) +
+  scale_x_continuous(breaks = c(0,1,2,3,4,5,6,7,8,9,10), limits = c(0, 11)) +
+  scale_y_continuous(breaks = c(10,20,30,40,50), limits = c(0, 50)) +
+  geom_label(label="xpo", 
+             x=10.7, 
+             y=48,
+             label.padding = unit(0.35, "lines"), # Rectangle size around label
+             label.size = 0.35,
+             color = "black",
+            fill="#77a8d2") +
+  geom_label(label="Rza", 
+             x=10.7, 
+             y=34,
+             label.padding = unit(0.35, "lines"), # Rectangle size around label
+             label.size = 0.35,
+             color = "black",
+            fill="#77a8d2") +
+    geom_label(label="Hoe", 
+             x=10.7, 
+             y=26,
+             label.padding = unit(0.35, "lines"), # Rectangle size around label
+             label.size = 0.35,
+             color = "black",
+            fill="#d5bf98") +
+    geom_label(label="jEK", 
+             x=10.7, 
+             y=20,
+             label.padding = unit(0.35, "lines"), # Rectangle size around label
+             label.size = 0.35,
+             color = "black",
+            fill="#d5bf98") +
+    theme(
+    text=element_text(family="times")
+  ) 
+
+plot1 + plot2 + plot_layout(guides="collect") & theme(legend.position="bottom", legend.key=element_rect(fill="white"))
+showtext_auto(FALSE)
+
+
+```
+
+```{r}
+data2 <- data |> filter(Cell_Line == "Cell Type 101")
+
+showtext_auto()
+
+data2 |> ggplot(aes(x=Concentration, y=Gene_Expression, col=Treatment)) + 
+  geom_point(aes(fill=Treatment), color="black", size=3, shape=21) +
+  ggtitle("Cell-type 101") +
+  xlab("µg/ml") +
+  ylab("Gene Expression") +
+  theme(legend.position="bottom", legend.key=element_rect(fill="white")) +
+  scale_fill_manual(values=c("#77a8d2", "#d5bf98")) +
+  scale_x_continuous(breaks = c(0,1,2,3,4,5,6,7,8,9,10), limits = c(0, 11)) +
+  scale_y_continuous(breaks = c(10,20,30,40,50), limits = c(0, 50)) +
+  geom_label(label="xpo", 
+             x=10.5, 
+             y=48,
+             label.padding = unit(0.35, "lines"), # Rectangle size around label
+             label.size = 0.35,
+             color = "black",
+            fill="#77a8d2") +
+  geom_label(label="Rza", 
+             x=10.5, 
+             y=34,
+             label.padding = unit(0.35, "lines"), # Rectangle size around label
+             label.size = 0.35,
+             color = "black",
+            fill="#77a8d2") +
+    geom_label(label="Hoe", 
+             x=10.5, 
+             y=26,
+             label.padding = unit(0.35, "lines"), # Rectangle size around label
+             label.size = 0.35,
+             color = "black",
+            fill="#d5bf98") +
+    geom_label(label="jEK", 
+             x=10.5, 
+             y=20,
+             label.padding = unit(0.35, "lines"), # Rectangle size around label
+             label.size = 0.35,
+             color = "black",
+            fill="#d5bf98") +
+    theme(
+    text=element_text(family="times")
+  ) 
+
+showtext_auto(FALSE)
+```
+
+```{r}
+library(showtext)
+
+font_add(
+  family="times",
+  regular=here::here("figs","Times New Roman.ttf")
+)
+
+showtext_auto()
+
+#par(mfrow=c(1,2)) #Set the plotting area into a 1*2 array
+
+data1 <- data |> filter(Cell_Line == "Wild Type")
+plot1<-data1 |> ggplot(aes(x=Concentration, y=Gene_Expression,col=Treatment)) + 
+  geom_point(aes(fill=Treatment),color="black", size=3, shape=21) +
+  ggtitle("Wild-type") +
+  xlab("µg/ml") +
+  ylab("Gene Expression") +
+  theme(legend.position="bottom", legend.key=element_rect(fill="white")) +
+  scale_fill_manual(values=c("#77a8d2", "#d5bf98")) +
+  scale_x_continuous(breaks = c(0,1,2,3,4,5,6,7,8,9,10), limits = c(0, 11)) +
+  geom_label_repel(data=data1 |> filter(Concentration=="10"), 
+                   aes(label=c("CsE","bNo","JZC","fUg"), fill=Treatment), 
+                   family="times", 
+                   size=4,
+                   box.padding=1, 
+                   point.padding=0.25,
+                   nudge_x=2,
+                   min.segment.length = 0,
+                   show.legend = FALSE, 
+                   colour="black", 
+                   direction="y") +
+    theme_bw() +
+    scale_fill_manual(values=c("#77a8d2", "#d5bf98")) +
+    theme(
+      text=element_text(family="times"))
+
+data2 <- data |> filter(Cell_Line == "Cell Type 101")
+plot2<-data2 |> ggplot(aes(x=Concentration, y=Gene_Expression, col=Treatment)) + 
+  geom_point(aes(fill=Treatment), color="black", size=3, shape=21) +
+  ggtitle("Cell-type 101") +
+  xlab("µg/ml") +
+  ylab("Gene Expression") +
+  theme(legend.position="bottom", legend.key=element_rect(fill="white")) +
+  scale_fill_manual(values=c("#77a8d2", "#d5bf98")) +
+  scale_x_continuous(breaks = c(0,1,2,3,4,5,6,7,8,9,10), limits = c(0, 11)) +
+  scale_y_continuous(breaks = c(10,20,30,40,50), limits = c(0, 50)) +
+  geom_label_repel(data=data2 |> filter(Concentration=="10"), 
+                   aes(label=c("jEK","Hoe","Rza","xpo"), fill=Treatment), 
+                   family="times", 
+                   size=4,
+                   box.padding=1, 
+                   point.padding=0.25,
+                   nudge_x=2,
+                   min.segment.length = 0,
+                   show.legend = FALSE, 
+                   colour="black", 
+                   direction="y") +
+    theme_bw() +
+    scale_fill_manual(values=c("#77a8d2", "#d5bf98")) +
+    theme(
+      text=element_text(family="times")) 
+
+ploty<-plot1 + plot2 + 
+  plot_annotation(tag_levels = "A") +
+  plot_layout(guides="collect") & theme(legend.position="bottom") +
+  theme(plot.title=element_text(size=17)) + 
+  theme(axis.title=element_text(size=13))
+
+showtext_auto(FALSE)
+
+ggsave(paste(here::here(), "Created files/Karl Plot.tiff", sep="/"), width=9, height=6, units="in", dpi=500)
+```
+

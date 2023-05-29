@@ -1,0 +1,311 @@
+# Read Me
+This document details the processes, analyses, plot making and calculations 
+undertaken for Karl Berator from the Institute of -omics.  
+
+There were 4 tasks
+
+* Powerpoint slides
+* Recreate image
+* Power calculation
+* IMRaD report
+
+The processes undertaken have been summarized below. To see any plots or tables 
+produced, please refer to the documents listed. 
+
+# File name: Gene Expression - Karl 1 Analysis. 
+
+## Initial set up
+Karl provided us with some data to look at the effect of a new treatment on gene 
+expression. It was provided in an excel format in multiple tabs so the first 
+thing I did was take the data from each tab and put it into an new excel
+spreadsheet so it can be imported into R. 
+
+## Cleaning
+Once imported into R, I then began cleaning the data. I performed a skim from 
+the skimr package and then looked at each variable individually. 
+
+During this, it was noted that there is a potential error in the data with a value of 
+gene expression of -99. This was then removed so it didn't effect the analysis.
+No other changes were made to any other variables. 
+
+## Plots
+Karl asked for some slides which showed the relationships in the data. To this, 
+I made the following plots:
+
+* I made a histogram of gene expression and included the 5 number summary in 
+orange dotted lines. The mean was marked in blue. 
+
+I also made some dot plots of gene expression coloured by the treatment 
+received. This also showed some interesting information about how gene
+expression varied for treatment, however this was not required for the final 
+slides. 
+
+I then made two parallel boxplots of:
+
+* gene expression vs treatment, coloured by cell_line 
+* gene expression vs cell line, coloured by treatment. 
+
+I then utilized code to produce the 5 number summary for each boxplot. This was 
+then put onto the plots in powerpoint (this was the quickest way for current me 
+to achieve this, hopefully future me knows a better way to do it in R). 
+
+The last plots were the scatter plots of:
+
+* gene expression vs concentration, coloured by treatment
+* gene expression vs concentration, coloured by cell line
+
+For consistency, the following colours were utilised:
+
+Treatment
+
+* Placebo = deepskyblue1
+* Activating Factor 42 = magenta1
+
+Cell Line
+
+* Wild Type = springgreen3
+* Cell Type 101 = darkorchid2
+
+Looking at the data, I could see there seemed to be a relationship between the 
+different cell lines and treatment received. In excel, I concatenated the cell line
+and treatment for each patient to make a new colum called Cell Line_Treatment. 
+
+I then made one last plot which was:
+
+*Gene expression vs concentration coloured by Cell Line_Treatment (the newly 
+created variable). 
+
+The following colours were used to make the plot:
+
+* Wild TypeActivating Factor 42 = dodgerblue2
+* Cell Type 101Activating Factor 42 = slategray
+* Wild TypePlacebo = darkmagenta
+* Cell Type 101Placebo = firebrick2
+
+## Tables
+Lastly, I made 2 tables utilizing the gt() function. 
+
+To make the first table, I grouped the data by cell line and found the mean and 
+standard deviation using the summarise() function. 
+This was then imputed into gt()
+
+To make the second table, I grouped the data by treatment and again found the 
+mean and standard deviation using the summarise() function. 
+This was then imputed into gt()
+
+I then took the created plots and tables and made a powerpoint file. 
+This has been saved in the created files folder under "Presentation Gene 
+Expression Data". 
+
+\newpage
+# File name: Karl Task 2. 
+
+## Initial Set up
+For this task, Karl sent us a image that he wanted us to recreate as a .tiff 
+file and change the fonts. 
+
+To being, I first loaded the gene expression data in and then filtered for values
+of gene expression greater than 0. 
+
+## Setting up the font change
+To allow for the font to be changed, we need to add the font using font_add() as below
+
+```default
+font_add(
+  family="times",
+  regular=here::here("figs","Times New Roman.ttf")
+)
+```
+
+I then needed to tell R that we were going to change the font using showtext_auto() 
+
+## Creating the plot
+To create the plot, I first made the plots separately and the combined them at the end. 
+
+#### Plot 1 - Gene Expression vs Concnetration filtered for Wild Type
+I first filtered the data for the Cell Line Wild Type and created a plot scatter plot of
+Gene expression vs Concentration coloured by treatment. 
+
+Titles and labels were created as per the image. The legend was positioned at the bottom
+of the plot and to remove the small square around the shape indicators in the legend, 
+legend.key=element_rect(fill="white") was used. 
+
+It was a requirement that the colours used in the recreated plot were the same
+as the sample image, thus a colour picker was utilized to work out the colours 
+asa hex colour. The two colours were: #77a8d2 and #d5bf98. 
+
+To set the increments on the x and y axis, scale_x_continuous() and 
+scale_y_continuous() were used. The breaks were identified and the 
+limits of the axes. 
+
+To get the labels on the plot, geom_label was utilized which set the 
+name in the label, the position, colour, padding and size of label. 
+
+To ensure the font was changed from R's default, the command 
+
+```default
+theme(text=element_text(family="times") 
+```
+was added. 
+
+#### Plot 2 - Gene Expression vs Concnetration filtered for Cell Type 101
+This time, the data was filtered for Cell Line = Cell Type 101. An identical
+process to plot 1 was undertaken to produce plot 2. 
+
+#### Combining the two plots together
+To combine the two plots, the following code was utilized:
+
+```default
+ploty<-plot1 + plot2 + 
+  plot_annotation(tag_levels = "A") +
+  plot_layout(guides="collect") & theme(legend.position="bottom") +
+  theme(plot.title=element_text(size=17)) + 
+  theme(axis.title=element_text(size=13))
+```
+  
+The plot_annotation(tag_levels = "A") command, allowed for the two side by side
+scatter plots to be labelled A and B. 
+
+## Saving the plot as a .tiff
+To save the created plot as a .tiff the following code was used: 
+
+```default
+ggsave(paste(here::here(), "Created files/Karl Plot.tiff", sep="/"), 
+width=9, height=6, units="in", dpi=500)
+```
+The image was saved into the created files folder. 
+
+\newpage
+# File name: Karl Task 3. 
+
+The goal of this task was to calculate the sample size required for a linear
+regression where $R^2= 0.1$, power=0.9 and significance level = 0.05. 
+
+The function pwr.f2.test from the pwr packaged was utilised for this calculation.
+The following needed to be determined:
+
+* Effect size
+* Number of predictors
+
+### Effect size
+To work out the effect size, we needed to calculate $R^2/(1-R^2)$ where 
+$R^2 = 0.1$ 
+
+### Number of predictors
+To work out the number of predictors, it is important to note that the reference 
+level is not counted. 
+
+For example if a variable has two levels, one will be included as the reference
+level so we would say there is only 1 predictor for that variable. 
+
+It was thus concluded that the number of predictors was 5. 
+
+### The final calculation
+The command:
+
+```default
+pwr.f2.test(u=num_pred, f2=effect_size, sig.level=alpha, power=power)
+```
+was used to work out the required sample size. 
+
+The output, v, is the denominator degrees of freedom rather than the sample size.
+Thus we needed to add on the total number of predictors and add one i.e.
+num_pred+1. 
+
+Thus the required sample size was 154. 
+
+# File name: Karl Task 4 and IMRaD Report 2
+
+The final task was to create a predictive model of gene expression and then write
+a IMRaD report. 
+
+To begin, I loaded the data and filtered out values of gene expression which 
+were less than 0. 
+
+I decided to use a random intercept model as my predictive model for gene expression. 
+To fit a random intercept model, the lmer() function from the lme4 package was used. 
+The lmer fit very similar to a normal linear model however the random intercept was
+achieved using the term (1|`Gene Line`). Gene line was used as the random intercept
+as it was the variable which you were not able to recreate. 
+
+I then made 4 different random intercept models:
+
+```Default
+model1<-lmer(Gene_Expression ~ Concentration + Cell_Line + Treatment + 
+(1|`Gene Line`), data=data)
+model2<-lmer(Gene_Expression ~ Concentration * Cell_Line * Treatment + 
+(1|`Gene Line`), data=data)
+model3<-lmer(Gene_Expression ~ Concentration * Treatment + Cell_Line + 
+(1|`Gene Line`), data=data)
+model4<-lmer(Gene_Expression ~ Concentration + Treatment * Cell_Line + 
+(1|`Gene Line`), data=data)
+```
+
+I compared them using AIC and I also looked at which terms in the model were 
+significant using:
+
+* ranova() - shows whether we need the random intercept term
+* anova() - shows which fixed effect terms are significant
+
+It became clear that model2 was the correct model to use, it had the smallest AIC
+and the 3 way interaction term was significant and thus no smaller models were considered. 
+
+From here, I began writing my IMRaD report. The IMRaD report has 4 key sections:
+
+### Introduction
+This section introduces the research question and also explains the key variables. 
+
+### Method
+The method explains how the analysis was undertaken and what plots were produced.
+
+### Results
+This section presents the results of the analysis which includes all plots, tables etc. 
+To aid the reader's understanding of the data, I decided to include the plot 
+produced in task 2. To do this, I simply copied the code and pasted it into my 
+IMRaD file. 
+
+To ensure no code was outputted in the final report, I used the command 
+echo=FALSE. This supressed the code but not the outputted plot or table. 
+
+In the final report, I decided to only include model 1 and model 2 in the analysis.
+
+To demonstrate that model 1 was not suitable, I used plot(model1) to make a
+residual vs fitted plot. 
+
+Given that model 2 was determined to be the chosen model, I produced two tables 
+using gt() which demonstrated the coefficents of the random effects and the 
+fixed effects. 
+
+To visualize my chosen model, values of gene expression were predicted from the chosen 
+model using the predict() function. The following code was utilized to create 
+a scatter plot of gene expression vs concentration. I also overlaid the predicted
+values of gene expression as a line. 
+
+```Default
+data |> mutate(my_model = predict(model2)) |>
+  ggplot(aes(x=Concentration, y=Gene_Expression, col=`Gene Line`)) + geom_point() +
+  geom_line(aes(x=Concentration, y=my_model))
+```
+
+This plot was beautiful but it made it too hard to see the fit for each individual 
+gene line - there was too much going on. So to assess the fit further, I used facet_wrap()
+to create 9 individual plots. The code for this has been supplied below:
+
+```Default
+data |> mutate(my_model = predict(model2)) |>
+  ggplot(aes(x=Concentration, y=Gene_Expression, col=`Gene Line`)) + 
+  geom_point() +
+  facet_wrap(~`Gene Line`) +
+  geom_line(aes(x=Concentration, y=my_model))
+```
+
+### Discussion
+Finally the discussion section comments on the results and analysis undertaken. 
+
+The final report was completed and made into a pdf file. It can be viewed in the
+Created Files folder. 
+
+
+
+
+

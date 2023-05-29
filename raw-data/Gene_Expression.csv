@@ -1,0 +1,89 @@
+﻿Cell_Line,Concentration,Treatment,Gene_Expression,Cell Line_Treatment,Gene Line
+Wild Type,0,Placebo,5.51,Wild TypePlacebo,GL-CsE
+Wild Type,1,Placebo,6.41,Wild TypePlacebo,GL-CsE
+Wild Type,2,Placebo,5.71,Wild TypePlacebo,GL-CsE
+Wild Type,3,Placebo,7.94,Wild TypePlacebo,GL-CsE
+Wild Type,4,Placebo,6.87,Wild TypePlacebo,GL-CsE
+Wild Type,5,Placebo,7.29,Wild TypePlacebo,GL-CsE
+Wild Type,6,Placebo,10.04,Wild TypePlacebo,GL-CsE
+Wild Type,7,Placebo,8.85,Wild TypePlacebo,GL-CsE
+Wild Type,8,Placebo,8.91,Wild TypePlacebo,GL-CsE
+Wild Type,9,Placebo,9.68,Wild TypePlacebo,GL-CsE
+Wild Type,10,Placebo,11.43,Wild TypePlacebo,GL-CsE
+Wild Type,0,Placebo,4.47,Wild TypePlacebo,GL-bNo
+Wild Type,1,Placebo,5.12,Wild TypePlacebo,GL-bNo
+Wild Type,2,Placebo,4.79,Wild TypePlacebo,GL-bNo
+Wild Type,3,Placebo,5.86,Wild TypePlacebo,GL-bNo
+Wild Type,4,Placebo,4.3,Wild TypePlacebo,GL-bNo
+Wild Type,5,Placebo,5.82,Wild TypePlacebo,GL-bNo
+Wild Type,6,Placebo,9.94,Wild TypePlacebo,GL-bNo
+Wild Type,7,Placebo,9.02,Wild TypePlacebo,GL-bNo
+Wild Type,8,Placebo,8.23,Wild TypePlacebo,GL-bNo
+Wild Type,9,Placebo,8.37,Wild TypePlacebo,GL-bNo
+Wild Type,10,Placebo,10.47,Wild TypePlacebo,GL-bNo
+Wild Type,0,Activating Factor 42,9.1,Wild TypeActivating Factor 42,GL-JZC
+Wild Type,1,Activating Factor 42,11.88,Wild TypeActivating Factor 42,GL-JZC
+Wild Type,2,Activating Factor 42,15.21,Wild TypeActivating Factor 42,GL-JZC
+Wild Type,3,Activating Factor 42,18.41,Wild TypeActivating Factor 42,GL-JZC
+Wild Type,4,Activating Factor 42,23.81,Wild TypeActivating Factor 42,GL-JZC
+Wild Type,5,Activating Factor 42,25.1,Wild TypeActivating Factor 42,GL-JZC
+Wild Type,6,Activating Factor 42,28.75,Wild TypeActivating Factor 42,GL-JZC
+Wild Type,7,Activating Factor 42,30.99,Wild TypeActivating Factor 42,GL-JZC
+Wild Type,8,Activating Factor 42,36.33,Wild TypeActivating Factor 42,GL-JZC
+Wild Type,9,Activating Factor 42,36,Wild TypeActivating Factor 42,GL-JZC
+Wild Type,10,Activating Factor 42,41.7,Wild TypeActivating Factor 42,GL-JZC
+Wild Type,0,Activating Factor 42,9.69,Wild TypeActivating Factor 42,GL-fUg
+Wild Type,1,Activating Factor 42,12.82,Wild TypeActivating Factor 42,GL-fUg
+Wild Type,2,Activating Factor 42,14.78,Wild TypeActivating Factor 42,GL-fUg
+Wild Type,3,Activating Factor 42,18.27,Wild TypeActivating Factor 42,GL-fUg
+Wild Type,4,Activating Factor 42,21.24,Wild TypeActivating Factor 42,GL-fUg
+Wild Type,5,Activating Factor 42,-99,Wild TypeActivating Factor 42,GL-fUg
+Wild Type,6,Activating Factor 42,24.25,Wild TypeActivating Factor 42,GL-fUg
+Wild Type,7,Activating Factor 42,29.11,Wild TypeActivating Factor 42,GL-fUg
+Wild Type,8,Activating Factor 42,32.79,Wild TypeActivating Factor 42,GL-fUg
+Wild Type,9,Activating Factor 42,32.69,Wild TypeActivating Factor 42,GL-fUg
+Wild Type,10,Activating Factor 42,36.38,Wild TypeActivating Factor 42,GL-fUg
+Cell Type 101,0,Placebo,5.35,Cell Type 101Placebo,GL-jEK
+Cell Type 101,1,Placebo,4.01,Cell Type 101Placebo,GL-jEK
+Cell Type 101,2,Placebo,8.53,Cell Type 101Placebo,GL-jEK
+Cell Type 101,3,Placebo,9.9,Cell Type 101Placebo,GL-jEK
+Cell Type 101,4,Placebo,11.66,Cell Type 101Placebo,GL-jEK
+Cell Type 101,5,Placebo,10.7,Cell Type 101Placebo,GL-jEK
+Cell Type 101,6,Placebo,13.65,Cell Type 101Placebo,GL-jEK
+Cell Type 101,7,Placebo,15.98,Cell Type 101Placebo,GL-jEK
+Cell Type 101,8,Placebo,16.74,Cell Type 101Placebo,GL-jEK
+Cell Type 101,9,Placebo,18.44,Cell Type 101Placebo,GL-jEK
+Cell Type 101,10,Placebo,20.21,Cell Type 101Placebo,GL-jEK
+Cell Type 101,0,Placebo,5.81,Cell Type 101Placebo,GL-Hoe
+Cell Type 101,1,Placebo,6.58,Cell Type 101Placebo,GL-Hoe
+Cell Type 101,2,Placebo,9.28,Cell Type 101Placebo,GL-Hoe
+Cell Type 101,3,Placebo,10.71,Cell Type 101Placebo,GL-Hoe
+Cell Type 101,4,Placebo,13.67,Cell Type 101Placebo,GL-Hoe
+Cell Type 101,5,Placebo,13.48,Cell Type 101Placebo,GL-Hoe
+Cell Type 101,6,Placebo,15.2,Cell Type 101Placebo,GL-Hoe
+Cell Type 101,7,Placebo,17.65,Cell Type 101Placebo,GL-Hoe
+Cell Type 101,8,Placebo,19.01,Cell Type 101Placebo,GL-Hoe
+Cell Type 101,9,Placebo,19.93,Cell Type 101Placebo,GL-Hoe
+Cell Type 101,10,Placebo,24.47,Cell Type 101Placebo,GL-Hoe
+Cell Type 101,0,Activating Factor 42,8.97,Cell Type 101Activating Factor 42,GL-Rza
+Cell Type 101,1,Activating Factor 42,11.62,Cell Type 101Activating Factor 42,GL-Rza
+Cell Type 101,2,Activating Factor 42,14.87,Cell Type 101Activating Factor 42,GL-Rza
+Cell Type 101,3,Activating Factor 42,15.47,Cell Type 101Activating Factor 42,GL-Rza
+Cell Type 101,4,Activating Factor 42,17.29,Cell Type 101Activating Factor 42,GL-Rza
+Cell Type 101,5,Activating Factor 42,20.78,Cell Type 101Activating Factor 42,GL-Rza
+Cell Type 101,6,Activating Factor 42,22.3,Cell Type 101Activating Factor 42,GL-Rza
+Cell Type 101,7,Activating Factor 42,24.37,Cell Type 101Activating Factor 42,GL-Rza
+Cell Type 101,8,Activating Factor 42,27.44,Cell Type 101Activating Factor 42,GL-Rza
+Cell Type 101,9,Activating Factor 42,30.74,Cell Type 101Activating Factor 42,GL-Rza
+Cell Type 101,10,Activating Factor 42,33.96,Cell Type 101Activating Factor 42,GL-Rza
+Cell Type 101,0,Activating Factor 42,11.49,Cell Type 101Activating Factor 42,GL-xpo
+Cell Type 101,1,Activating Factor 42,15.01,Cell Type 101Activating Factor 42,GL-xpo
+Cell Type 101,2,Activating Factor 42,17.88,Cell Type 101Activating Factor 42,GL-xpo
+Cell Type 101,3,Activating Factor 42,20.17,Cell Type 101Activating Factor 42,GL-xpo
+Cell Type 101,4,Activating Factor 42,26.22,Cell Type 101Activating Factor 42,GL-xpo
+Cell Type 101,5,Activating Factor 42,31.77,Cell Type 101Activating Factor 42,GL-xpo
+Cell Type 101,6,Activating Factor 42,34.43,Cell Type 101Activating Factor 42,GL-xpo
+Cell Type 101,7,Activating Factor 42,36.66,Cell Type 101Activating Factor 42,GL-xpo
+Cell Type 101,8,Activating Factor 42,39.26,Cell Type 101Activating Factor 42,GL-xpo
+Cell Type 101,9,Activating Factor 42,44.18,Cell Type 101Activating Factor 42,GL-xpo
+Cell Type 101,10,Activating Factor 42,48.96,Cell Type 101Activating Factor 42,GL-xpo

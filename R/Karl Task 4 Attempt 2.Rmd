@@ -1,0 +1,88 @@
+---
+title: "Karl Task 4 Attempt 2"
+author: "Taryn H"
+date: "2023-05-23"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+pacman::p_load(tidyverse, tidymodels, lme4, lmerTest, readr, gt)
+#install.packages("lme4")
+#install.packages("sjPlot")
+#install.packages("lmer.test")
+#library("lme4")
+#library("sjPlot")
+
+```
+
+#Reading the data in and filtering
+```{r}
+data<-read_csv(here::here("raw-data", "Gene_Expression.csv"))
+#data <- data |> select(Cell_Line, Concentration, Treatment,Gene_Expression)
+
+data <- data |> filter(Gene_Expression>0)
+data
+```
+
+
+#Model 1 - Gene Line as random treatment
+```{r}
+model1<-lmer(Gene_Expression ~ Concentration + Cell_Line + Treatment + (1|`Gene Line`), data=data)
+
+plot(model1)
+
+ranova(model1) #This shows we need this intercept term
+anova(model1) #This shows the triple interaction is significant thus we choose this model
+
+gt(ranova(model1)) |> 
+  cols_hide(colums=c(npar, logLik, AIC, LRT, Df))
+
+
+
+   
+```
+
+#Model 2 - 
+```{r}
+model2<-lmer(Gene_Expression ~ Concentration * Cell_Line * Treatment + (1|`Gene Line`), data=data)
+plot(model2)
+
+
+ranova(model2) #This shows we need this intercept term
+anova(model2) #This shows the triple interaction is significant thus we choose this model
+
+gt(anova(model2))
+
+```
+
+#Model 3 - 
+```{r}
+model3<-lmer(Gene_Expression ~ Concentration * Treatment + Cell_Line + (1|`Gene Line`), data=data)
+plot(model3)
+
+ranova(model3) #This shows we need this intercept term
+anova(model3)
+```
+
+Model 4
+```{r}
+model4<-lmer(Gene_Expression ~ Concentration + Treatment * Cell_Line + (1|`Gene Line`), data=data)
+plot(model3)
+```
+AIC
+```{r}
+AIC(model1, model2)
+
+```
+
+
+```{r}
+data |> mutate(my_model = predict(model2)) |>
+  ggplot(aes(x=Concentration, y=Gene_Expression, col=`Gene Line`)) + geom_point() +
+  geom_line(aes(x=Concentration, y=my_model))
+```
+

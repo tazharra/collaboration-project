@@ -1,0 +1,200 @@
+---
+title: "Gene Expression - Karl 1"
+author: "Taryn H"
+date: "2023-03-01"
+output:
+  pdf_document: default
+  beamer_presentation: default
+  html_document: default
+  word_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+pacman::p_load(tidyverse, tidymodels,glmnet, plotly, 
+               vip, paletteer,car, ggplot2,gt,dplyr,viridis, arsenal)
+```
+
+
+#Inserting Code
+```{r}
+data<-read_csv(here::here("raw-data", "Gene_Expression.csv"))
+data
+
+```
+
+#Clean
+```{r}
+skimr::skim_without_charts(data)
+```
+
+#Investigate gene expression
+```{r}
+data |> ggplot(aes(x=Gene_Expression)) + geom_histogram() + ggtitle("Gene Expression") 
+
+#We can see there is a value of -99 which has been entered incorrectly - we will set this to NA
+
+data <- data |> filter(Gene_Expression>0)
+
+five<- fivenum(data$Gene_Expression)
+
+data |> ggplot(aes(x=Gene_Expression)) + 
+  geom_histogram(fill="mediumaquamarine", col="black") + 
+  ggtitle("Gene Expression") + 
+  geom_vline(aes(xintercept=mean(Gene_Expression)),col="darkblue",linetype="dashed",size=1)  +
+  scale_color_brewer(palette="Dark2") +
+  geom_vline(aes(xintercept=five[1]),col="darkorange3",linetype="dashed",size=1) +
+  geom_vline(aes(xintercept=five[2]),col="darkorange3",linetype="dashed",size=1) +
+  geom_vline(aes(xintercept=five[3]),col="darkorange3",linetype="dashed",size=1) +
+  geom_vline(aes(xintercept=five[4]),col="darkorange3",linetype="dashed",size=1) +
+  geom_vline(aes(xintercept=five[5]),col="darkorange3",linetype="dashed",size=1)
+
+```
+
+#Investigate cell line
+```{r}
+class(data$Cell_Line)
+table(data$Cell_Line)
+```
+
+#Investigate Concentration
+```{r}
+class(data$Concentration)
+table(data$Concentration)
+```
+
+#Investigate Treatment
+```{r}
+class(data$Treatment)
+
+table(data$Treatment)
+```
+
+#Gene Expression box plot + points
+```{r}
+data |> ggplot(aes(x=Gene_Expression, fill=Treatment)) + 
+  geom_dotplot(dotsize=1.2) + 
+  scale_fill_manual(values=c("Placebo" = "deepskyblue1", 
+                               "Activating Factor 42"="magenta1")) +
+  ggtitle("Dot Plot of Gene Expression coloured by Treatment")
+
+data |> ggplot(aes(x=Gene_Expression, fill=Cell_Line)) + 
+  geom_dotplot(dotsize=1.2) + 
+  scale_fill_manual(values=c("Wild Type" = "springgreen3", 
+                               "Cell Type 101"="darkorchid2")) +
+  ggtitle("Dot Plot of Gene Expression coloured by Cell Line")
+```
+
+#Plots 
+```{r}
+sum <- data |> group_by(Cell_Line) |> summarize(min=fivenum(Gene_Expression)[1],
+                                                Q1=fivenum(Gene_Expression)[2],
+                                                Med=fivenum(Gene_Expression)[3],
+                                                Q3=fivenum(Gene_Expression)[4],
+                                                max=fivenum(Gene_Expression)[5])
+sum
+
+sum2 <- data |> group_by(Treatment) |> summarize(min=fivenum(Gene_Expression)[1],
+                                                Q1=fivenum(Gene_Expression)[2],
+                                                Med=fivenum(Gene_Expression)[3],
+                                                Q3=fivenum(Gene_Expression)[4],
+                                                max=fivenum(Gene_Expression)[5])
+sum2
+```
+
+
+
+```{r}
+data |> ggplot(aes(x=Treatment, y=Gene_Expression,fill=Cell_Line)) + 
+  geom_boxplot() +  
+  scale_fill_manual(values=c("Wild Type" = "springgreen3", 
+                               "Cell Type 101"="darkorchid2")) + ggtitle("Gene Expression vs Treatment")
+
+```
+
+```{r}
+data |> ggplot(aes(x=Cell_Line, y=Gene_Expression,fill=Treatment)) + 
+  geom_boxplot() +   
+  scale_fill_manual(values=c("Placebo" = "deepskyblue1", 
+                               "Activating Factor 42"="magenta1")) +
+  ggtitle("Gene Expression vs Cell Line")
+```
+
+
+
+```{r}
+sum3 <- data |> group_by(Treatment,Cell_Line) |> summarize(min=fivenum(Gene_Expression)[1],
+                                                Q1=fivenum(Gene_Expression)[2],
+                                                Med=fivenum(Gene_Expression)[3],
+                                                Q3=fivenum(Gene_Expression)[4],
+                                                max=fivenum(Gene_Expression)[5])
+sum3
+```
+
+
+
+```{r}
+data |> ggplot(aes(x=Concentration, y=Gene_Expression, col=Treatment)) + 
+  geom_point(line="black") + geom_smooth() +
+  scale_colour_manual(values=c("Placebo" = "deepskyblue1", 
+                               "Activating Factor 42"="magenta1")) + 
+  ggtitle("Gene Expression vs Concentration Coloured By Treatment")
+```
+
+```{r}
+data |> ggplot(aes(x=Concentration, y=Gene_Expression, col=Cell_Line)) +
+  geom_point() +
+  scale_colour_manual(values=c("Wild Type" = "springgreen3", 
+                               "Cell Type 101"="darkorchid2")) +ggtitle("Gene Expression vs Concentration Coloured By Cell Line")
+```
+
+```{r}
+data |> ggplot(aes(x=Concentration, y=Gene_Expression, col=`Cell Line_Treatment`)) + 
+  geom_point() + geom_smooth(method=lm) +
+  ggtitle("Gene Expression vs Concentration Coloured By Cell Line Concatenated with Treatment") +
+  scale_colour_manual(values=c("Wild TypeActivating Factor 42"="dodgerblue2",
+                               "Cell Type 101Activating Factor 42"="slategray",
+                               "Wild TypePlacebo"="darkmagenta",
+                               "Cell Type 101Placebo"="firebrick2"))
+
+```
+
+
+#Make a table
+```{r}
+Cell1<-data |> 
+  group_by(Cell_Line) |> 
+  summarise(Mean=mean(Gene_Expression), SD=sd(Gene_Expression))
+
+gt_data1<-
+  gt(Cell1) |>
+  tab_header(title="Table 1: Mean of Gene Expression for each Cell Line")
+gt_data1 |>
+cols_label(Cell_Line="Cell Line",Mean="Mean", SD="Standard Deviation")
+```
+
+#Make a table 2
+```{r}
+Treat1<-data |> 
+  group_by(Treatment) |>
+  summarise(Mean=mean(Gene_Expression), SD=sd(Gene_Expression))
+
+gt_data2<-
+  gt(Treat1) |>
+  tab_header(title="Table 2: Mean of Gene Expression for each Treatment")
+gt_data2 |>
+cols_label(Mean="Mean", SD="Standard Deviation")
+```
+
+
+#Make a table 3
+```{r}
+five_num<-data |>
+  group_by(Treatment) |>
+  summarise(fivenum=fivenum(Gene_Expression))
+
+five_num
+
+```
+
+
