@@ -18,7 +18,7 @@ pacman::p_load(tidyverse, tidymodels,glmnet, plotly,
 
 # Load Data + filter out outlier
 ```{r}
-data<-read_csv(here::here("raw-data", "Gene_Expression.csv"))
+data<-read_csv(here::here("Cleaned Data", "Gene_Expression.csv"))
 data
 
 data <- data |> filter(Gene_Expression>0)

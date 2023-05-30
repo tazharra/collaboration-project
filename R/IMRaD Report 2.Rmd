@@ -19,7 +19,7 @@ pacman::p_load(tidyverse, tidymodels,glmnet, plotly,
 
 
 ```{r, echo=FALSE, message=FALSE}
-data<-read_csv(here::here("raw-data", "Gene_Expression.csv"))
+data<-read_csv(here::here("Cleaned Data", "Gene_Expression.csv"))
 #data <- data |> select(Cell_Line, concentration, treatment,gene_expression)
 
 data <- data |> filter(Gene_Expression>0)

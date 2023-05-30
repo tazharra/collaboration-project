@@ -21,7 +21,7 @@ pacman::p_load(tidyverse, tidymodels, lme4, lmerTest, readr, gt)
 
 #Reading the data in and filtering
 ```{r}
-data<-read_csv(here::here("raw-data", "Gene_Expression.csv"))
+data<-read_csv(here::here("Cleaned Data", "Gene_Expression.csv"))
 #data <- data |> select(Cell_Line, Concentration, Treatment,Gene_Expression)
 
 data <- data |> filter(Gene_Expression>0)
