@@ -4,15 +4,22 @@ format:
   html:
     embed-resources: false
 editor: visual
+cache: false
+echo: false
+include: false
 ---
 
 The collaboration project contains all R files, documents, analysis and calculations undertaken throughout the project.
 
 The files have the following structure:
 
-### Raw-Data
+### Initial Data From Collaborator
 
-Contains the data compiled into one excel document. The collaborator provided the original file as a google sheet which we were not allowed to download. The data was in multiple tabs so it was combined into one data list.
+This file contains the excel spreadsheet provided to us by Karl.
+
+### Cleaned Data
+
+The data provided to us was in multiple tabs so it was combined into long data list ready to be inputted into R.
 
 ### R
 
@@ -45,6 +52,10 @@ This file contains all the outputted files required for submission. The files we
     -   Gene-Expression---Karl-1-Analysis.docx
 
 -   Karl Task 3.pdf (From Task 3)
+
+### Resources
+
+-   This folder contains any resources from the collaborator. It contains the plot we were required to recreate for task 2.
 
 ### Read Me Quarto Files
 

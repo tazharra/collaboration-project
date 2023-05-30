@@ -126,31 +126,33 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <section id="initial-set-up" class="level2">
 <h2 class="anchored" data-anchor-id="initial-set-up">Initial set up</h2>
 <p>Karl provided us with some data to look at the effect of a new treatment on gene expression. It was provided in an excel format in multiple tabs so the first thing I did was take the data from each tab and put it into an new excel spreadsheet so it can be imported into R.</p>
+<p>The raw data in the format Karl gave us can be found can be found in the folder: Initial Data From Collaborator.</p>
+<p>The organised data is found in the file: Cleaned Data.</p>
 </section>
 <section id="cleaning" class="level2">
 <h2 class="anchored" data-anchor-id="cleaning">Cleaning</h2>
-<p>Once imported into R, I then began cleaning the data. I performed a skim from the skimr package and then looked at each variable individually.</p>
+<p>Once imported into R, I began cleaning the data. I performed a skim from the skimr package and then looked at each variable individually.</p>
 <p>During this, it was noted that there is a potential error in the data with a value of gene expression of -99. This was then removed so it didn’t effect the analysis. No other changes were made to any other variables.</p>
 </section>
 <section id="plots" class="level2">
 <h2 class="anchored" data-anchor-id="plots">Plots</h2>
-<p>Karl asked for some slides which showed the relationships in the data. To this, I made the following plots:</p>
+<p>Karl asked for some slides which showed the relationships in the data. To do this, I made the following plots:</p>
 <ul>
-<li>I made a histogram of gene expression and included the 5 number summary in orange dotted lines. The mean was marked in blue.</li>
+<li>A histogram of gene expression and included the 5 number summary in orange dotted lines. The mean was marked in blue.</li>
 </ul>
 <p>I also made some dot plots of gene expression coloured by the treatment received. This also showed some interesting information about how gene expression varied for treatment, however this was not required for the final slides.</p>
 <p>I then made two parallel boxplots of:</p>
 <ul>
 <li>gene expression vs treatment, coloured by cell_line</li>
-<li>gene expression vs cell line, coloured by treatment.</li>
+<li>gene expression vs cell line, coloured by treatment</li>
 </ul>
-<p>I then utilized code to produce the 5 number summary for each boxplot. This was then put onto the plots in powerpoint (this was the quickest way for current me to achieve this, hopefully future me knows a better way to do it in R).</p>
+<p>I then utilized code to produce the 5 number summary for each boxplot. This was then put onto the plots in Powerpoint as text (this was the quickest way for current me to achieve this, hopefully future me knows a better way to do it in R).</p>
 <p>The last plots were the scatter plots of:</p>
 <ul>
 <li>gene expression vs concentration, coloured by treatment</li>
 <li>gene expression vs concentration, coloured by cell line</li>
 </ul>
-<p>For consistency, the following colours were utilised:</p>
+<p>For consistency, the following colours were utilized:</p>
 <p>Treatment</p>
 <ul>
 <li>Placebo = deepskyblue1</li>
@@ -161,7 +163,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Wild Type = springgreen3</li>
 <li>Cell Type 101 = darkorchid2</li>
 </ul>
-<p>Looking at the data, I could see there seemed to be a relationship between the different cell lines and treatment received. In excel, I concatenated the cell line and treatment for each patient to make a new colum called Cell Line_Treatment.</p>
+<p>Looking at the data, I could see there seemed to be a relationship between the different cell lines and treatment received. In excel, I concatenated the cell line and treatment for each patient to make a new column called Cell Line_Treatment.</p>
 <p>I then made one last plot which was:</p>
 <p>*Gene expression vs concentration coloured by Cell Line_Treatment (the newly created variable).</p>
 <p>The following colours were used to make the plot:</p>
@@ -177,14 +179,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Lastly, I made 2 tables utilizing the gt() function.</p>
 <p>To make the first table, I grouped the data by cell line and found the mean and standard deviation using the summarise() function. This was then imputed into gt()</p>
 <p>To make the second table, I grouped the data by treatment and again found the mean and standard deviation using the summarise() function. This was then imputed into gt()</p>
-<p>I then took the created plots and tables and made a powerpoint file. This has been saved in the created files folder under “Presentation Gene Expression Data”.</p>
+<p>I then took the created plots and tables and made a Powerpoint file. This has been saved in the Created Files folder under “Presentation Gene Expression Data”.</p>
 </section>
 </section>
 <section id="file-name-karl-task-2." class="level1">
 <h1>File name: Karl Task 2.</h1>
 <section id="initial-set-up-1" class="level2">
 <h2 class="anchored" data-anchor-id="initial-set-up-1">Initial Set up</h2>
-<p>For this task, Karl sent us a image that he wanted us to recreate as a .tiff file and change the fonts.</p>
+<p>For this task, Karl sent us a image that he wanted us to recreate as a .tiff file and change the fonts. The image Karl asked us to recreate can be found in the Resources folder.</p>
 <p>To being, I first loaded the gene expression data in and then filtered for values of gene expression greater than 0.</p>
 </section>
 <section id="setting-up-the-font-change" class="level2">
@@ -199,44 +201,51 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <section id="creating-the-plot" class="level2">
 <h2 class="anchored" data-anchor-id="creating-the-plot">Creating the plot</h2>
 <p>To create the plot, I first made the plots separately and the combined them at the end.</p>
-<section id="plot-1---gene-expression-vs-concnetration-filtered-for-wild-type" class="level4">
-<h4 class="anchored" data-anchor-id="plot-1---gene-expression-vs-concnetration-filtered-for-wild-type">Plot 1 - Gene Expression vs Concnetration filtered for Wild Type</h4>
-<p>I first filtered the data for the Cell Line Wild Type and created a plot scatter plot of Gene expression vs Concentration coloured by treatment.</p>
+<section id="plot-1---gene-expression-vs-concentration-filtered-for-wild-type" class="level4">
+<h4 class="anchored" data-anchor-id="plot-1---gene-expression-vs-concentration-filtered-for-wild-type">Plot 1 - Gene Expression vs Concentration filtered for Wild Type</h4>
+<p>I first filtered the data for the Cell Line: Wild Type and created a scatter plot of Gene Expression vs Concentration coloured by treatment.</p>
 <p>Titles and labels were created as per the image. The legend was positioned at the bottom of the plot and to remove the small square around the shape indicators in the legend, legend.key=element_rect(fill=“white”) was used.</p>
-<p>It was a requirement that the colours used in the recreated plot were the same as the sample image, thus a colour picker was utilized to work out the colours asa hex colour. The two colours were: #77a8d2 and #d5bf98.</p>
+<p>It was a requirement that the colours used in the recreated plot were the same as the sample image, thus a colour picker from then internet was utilized to work out the colours as a hex colour. The two colours were: #77a8d2 and #d5bf98.</p>
 <p>To set the increments on the x and y axis, scale_x_continuous() and scale_y_continuous() were used. The breaks were identified and the limits of the axes.</p>
-<p>To get the labels on the plot, geom_label was utilized which set the name in the label, the position, colour, padding and size of label.</p>
+<p>To get the labels on the plot, geom_label() was utilized which set the name in the label, the position, colour, padding and size of label. An example has been provided below:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>geom_label(label="xpo", </span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>             x=10.7, </span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>             y=48,</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>             label.padding = unit(0.35, "lines"), # Rectangle size around label</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>             label.size = 0.35,</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>             color = "black",</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>            fill="#77a8d2")</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>To ensure the font was changed from R’s default, the command</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>theme(text=element_text(family="times") </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>theme(text=element_text(family="times") </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>was added.</p>
 </section>
-<section id="plot-2---gene-expression-vs-concnetration-filtered-for-cell-type-101" class="level4">
-<h4 class="anchored" data-anchor-id="plot-2---gene-expression-vs-concnetration-filtered-for-cell-type-101">Plot 2 - Gene Expression vs Concnetration filtered for Cell Type 101</h4>
-<p>This time, the data was filtered for Cell Line = Cell Type 101. An identical process to plot 1 was undertaken to produce plot 2.</p>
+<section id="plot-2---gene-expression-vs-concentration-filtered-for-cell-type-101" class="level4">
+<h4 class="anchored" data-anchor-id="plot-2---gene-expression-vs-concentration-filtered-for-cell-type-101">Plot 2 - Gene Expression vs Concentration filtered for Cell Type 101</h4>
+<p>This time, the data was filtered for Cell Line: Cell Type 101. An identical process to plot 1 was undertaken to produce plot 2.</p>
 </section>
 <section id="combining-the-two-plots-together" class="level4">
 <h4 class="anchored" data-anchor-id="combining-the-two-plots-together">Combining the two plots together</h4>
 <p>To combine the two plots, the following code was utilized:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>ploty&lt;-plot1 + plot2 + </span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  plot_annotation(tag_levels = "A") +</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  plot_layout(guides="collect") &amp; theme(legend.position="bottom") +</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  theme(plot.title=element_text(size=17)) + </span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  theme(axis.title=element_text(size=13))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>ploty&lt;-plot1 + plot2 + </span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  plot_annotation(tag_levels = "A") +</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  plot_layout(guides="collect") &amp; theme(legend.position="bottom") +</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  theme(plot.title=element_text(size=17)) + </span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  theme(axis.title=element_text(size=13))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>The plot_annotation(tag_levels = “A”) command, allowed for the two side by side scatter plots to be labelled A and B.</p>
 </section>
 </section>
 <section id="saving-the-plot-as-a-.tiff" class="level2">
 <h2 class="anchored" data-anchor-id="saving-the-plot-as-a-.tiff">Saving the plot as a .tiff</h2>
 <p>To save the created plot as a .tiff the following code was used:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>ggsave(paste(here::here(), "Created files/Karl Plot.tiff", sep="/"), </span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>width=9, height=6, units="in", dpi=500)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>ggsave(paste(here::here(), "Created files/Karl Plot.tiff", sep="/"), </span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>width=9, height=6, units="in", dpi=500)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>The image was saved into the created files folder.</p>
 </section>
 </section>
 <section id="file-name-karl-task-3." class="level1">
 <h1>File name: Karl Task 3.</h1>
 <p>The goal of this task was to calculate the sample size required for a linear regression where <span class="math inline">\(R^2= 0.1\)</span>, power=0.9 and significance level = 0.05.</p>
-<p>The function pwr.f2.test from the pwr packaged was utilised for this calculation. The following needed to be determined:</p>
+<p>The function pwr.f2.test from the pwr packaged was utilized for this calculation. The following needed to be determined:</p>
 <ul>
 <li>Effect size</li>
 <li>Number of predictors</li>
@@ -254,26 +263,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <section id="the-final-calculation" class="level3">
 <h3 class="anchored" data-anchor-id="the-final-calculation">The final calculation</h3>
 <p>The command:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>pwr.f2.test(u=num_pred, f2=effect_size, sig.level=alpha, power=power)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>pwr.f2.test(u=num_pred, f2=effect_size, sig.level=alpha, power=power)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>was used to work out the required sample size.</p>
-<p>The output, v, is the denominator degrees of freedom rather than the sample size. Thus we needed to add on the total number of predictors and add one i.e. num_pred+1.</p>
+<p>The output, v, is the denominator degrees of freedom rather than the sample size. Thus we needed to add on the total number of predictors and add one i.e.&nbsp;num_pred+1.</p>
 <p>Thus the required sample size was 154.</p>
 </section>
 </section>
-<section id="file-name-karl-task-4-and-imrad-report-2" class="level1">
-<h1>File name: Karl Task 4 and IMRaD Report 2</h1>
+<section id="file-names-karl-task-4-attempt-2-and-imrad-report-2" class="level1">
+<h1>File names: Karl Task 4 Attempt 2 and IMRaD Report 2</h1>
 <p>The final task was to create a predictive model of gene expression and then write a IMRaD report.</p>
 <p>To begin, I loaded the data and filtered out values of gene expression which were less than 0.</p>
-<p>I decided to use a random intercept model as my predictive model for gene expression. To fit a random intercept model, the lmer() function from the lme4 package was used. The lmer fit very similar to a normal linear model however the random intercept was achieved using the term (1|<code>Gene Line</code>). Gene line was used as the random intercept as it was the variable which you were not able to recreate.</p>
+<p>I decided to use a random intercept model as my predictive model for gene expression. To fit a random intercept model, the lmer() function from the lme4 package was used. The lmer fit very similar to a normal linear model however the random intercept was achieved using the term (1|<code>Gene Line</code>). Gene line was used as the random intercept - it was the variable which you were not able to recreate or reproduce.</p>
 <p>I then made 4 different random intercept models:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>model1&lt;-lmer(Gene_Expression ~ Concentration + Cell_Line + Treatment + </span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>(1|`Gene Line`), data=data)</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>model2&lt;-lmer(Gene_Expression ~ Concentration * Cell_Line * Treatment + </span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>(1|`Gene Line`), data=data)</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>model3&lt;-lmer(Gene_Expression ~ Concentration * Treatment + Cell_Line + </span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>(1|`Gene Line`), data=data)</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>model4&lt;-lmer(Gene_Expression ~ Concentration + Treatment * Cell_Line + </span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>(1|`Gene Line`), data=data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>model1&lt;-lmer(Gene_Expression ~ Concentration + Cell_Line + Treatment + </span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>(1|`Gene Line`), data=data)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>model2&lt;-lmer(Gene_Expression ~ Concentration * Cell_Line * Treatment + </span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>(1|`Gene Line`), data=data)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>model3&lt;-lmer(Gene_Expression ~ Concentration * Treatment + Cell_Line + </span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>(1|`Gene Line`), data=data)</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>model4&lt;-lmer(Gene_Expression ~ Concentration + Treatment * Cell_Line + </span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>(1|`Gene Line`), data=data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>I compared them using AIC and I also looked at which terms in the model were significant using:</p>
 <ul>
 <li>ranova() - shows whether we need the random intercept term</li>
@@ -292,20 +301,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <section id="results" class="level3">
 <h3 class="anchored" data-anchor-id="results">Results</h3>
 <p>This section presents the results of the analysis which includes all plots, tables etc. To aid the reader’s understanding of the data, I decided to include the plot produced in task 2. To do this, I simply copied the code and pasted it into my IMRaD file.</p>
-<p>To ensure no code was outputted in the final report, I used the command echo=FALSE. This supressed the code but not the outputted plot or table.</p>
+<p>To ensure no code was outputted in the final report, I used the command echo=FALSE. This suppressed the code but not the outputted plot or table.</p>
 <p>In the final report, I decided to only include model 1 and model 2 in the analysis.</p>
 <p>To demonstrate that model 1 was not suitable, I used plot(model1) to make a residual vs fitted plot.</p>
-<p>Given that model 2 was determined to be the chosen model, I produced two tables using gt() which demonstrated the coefficents of the random effects and the fixed effects.</p>
+<p>Given that model 2 was determined to be the chosen model, I produced two tables using gt() which demonstrated the coefficients of the random effects and the fixed effects. To get the coefficients of the fixed effects I used fixef(model2) and for the random effects ranef(model2). The outputs from the fixef and ranef were made into a tibble so they would work in the gt() function.</p>
 <p>To visualize my chosen model, values of gene expression were predicted from the chosen model using the predict() function. The following code was utilized to create a scatter plot of gene expression vs concentration. I also overlaid the predicted values of gene expression as a line.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>data |&gt; mutate(my_model = predict(model2)) |&gt;</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  ggplot(aes(x=Concentration, y=Gene_Expression, col=`Gene Line`)) + geom_point() +</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  geom_line(aes(x=Concentration, y=my_model))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>This plot was beautiful but it made it too hard to see the fit for each individual gene line - there was too much going on. So to assess the fit further, I used facet_wrap() to create 9 individual plots. The code for this has been supplied below:</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>data |&gt; mutate(my_model = predict(model2)) |&gt;</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  ggplot(aes(x=Concentration, y=Gene_Expression, col=`Gene Line`)) + </span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  geom_point() +</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  facet_wrap(~`Gene Line`) +</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  geom_line(aes(x=Concentration, y=my_model))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  geom_line(aes(x=Concentration, y=my_model))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This plot was beautiful but it made it too hard to see the fit for each individual gene line - there was too much going on. So to assess the fit further, I used facet_wrap() to create 9 individual plots. The code for this has been supplied below:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>data |&gt; mutate(my_model = predict(model2)) |&gt;</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  ggplot(aes(x=Concentration, y=Gene_Expression, col=`Gene Line`)) + </span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  geom_point() +</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  facet_wrap(~`Gene Line`) +</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  geom_line(aes(x=Concentration, y=my_model))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="discussion" class="level3">
 <h3 class="anchored" data-anchor-id="discussion">Discussion</h3>
