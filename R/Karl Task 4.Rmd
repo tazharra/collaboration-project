@@ -21,7 +21,8 @@ library("sjPlot")
 
 #Load in data
 ```{r}
-data<-read_csv(here::here("raw-data", "Gene_Expression.csv"))
+data<-read_csv(here::here("Cleaned Data", "Gene_Expression.csv"))
+
 #data <- data |> select(Cell_Line, Concentration, Treatment,Gene_Expression)
 
 data <- data |> filter(Gene_Expression>0)
