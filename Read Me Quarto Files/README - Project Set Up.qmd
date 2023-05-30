@@ -1,6 +1,8 @@
 ---
 title: "READ ME - Project Set Up"
-format: html
+format: 
+  html:
+    embed-resources: false
 editor: visual
 ---
 
