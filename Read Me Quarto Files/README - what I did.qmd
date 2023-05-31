@@ -28,8 +28,8 @@ on gene expression. It was provided in an excel format in multiple tabs
 so the first thing I did was take the data from each tab and put it into
 an new excel spreadsheet so it can be imported into R.
 
-The raw data in the format Karl gave us can be found can be found in the
-folder: Initial Data From Collaborator.
+The raw data in the format Karl gave us can be found in the folder:
+Initial Data From Collaborator.
 
 The organised data is found in the file: Cleaned Data.
 
@@ -146,7 +146,7 @@ showtext_auto()
 
 ## Creating the plot
 
-To create the plot, I first made the plots separately and the combined
+To create the plot, I first made the plots separately and then combined
 them at the end.
 
 #### Plot 1 - Gene Expression vs Concentration filtered for Wild Type
